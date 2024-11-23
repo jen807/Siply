@@ -1,6 +1,15 @@
+import { HashRouter, Route, Routes } from "react-router-dom"
+import Home from "./pages/Home/Home"
+
 const Router = () => {
 return(
-  <div>이건 라우터</div>
+  <HashRouter>
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      {/* <Route path="/search" element={<Search />}/> */}
+      {/* <Route/> */}
+    </Routes>
+  </HashRouter>
 )
 }
 

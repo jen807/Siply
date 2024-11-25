@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { fetchByName, fetchByIngredient } from "../../api"; // API 가져오기
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
+import { fetchByName, fetchByIngredient } from "../../api";
 import Logo from "../../imgs/Logo.png";
 import { ReactComponent as SearchIcon } from "../../imgs/SearchIcon.svg";
 
@@ -22,30 +22,25 @@ const Header = styled.div`
     width: 100px;
     margin-bottom: 20px;
   }
-
-  h1 {
-    font-size: 24px;
-    font-weight: 700;
-  }
 `;
 
 const SearchBar = styled.form`
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 10px;
   margin-bottom: 20px;
-  width: 100%;
   border-bottom: 1px solid black;
 
   input {
     width: 70%;
-    font-size: 18px;
+    font-size: 24px;
     padding: 10px;
     border: none;
     background: none;
     outline: none;
     font-family: "116angmuburi";
-    margin-right: 10px;
   }
 
   svg {
@@ -69,10 +64,6 @@ const Tabs = styled.div`
     font-size: 16px;
     border-bottom: 2px solid transparent;
 
-    &:hover {
-      color: #ffaa7c;
-    }
-
     &.active {
       border-bottom: 2px solid #ffaa7c;
       font-weight: bold;
@@ -89,15 +80,15 @@ const ResultsList = styled.div`
 const Card = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
   padding: 15px;
-  background-color: #f8f4f4;
-  border-radius: 15px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f6f8;
+  border-radius: 60px 0px 60px 60px;
 `;
 
 const Thumbnail = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   overflow: hidden;
   margin-right: 20px;
@@ -114,50 +105,46 @@ const Info = styled.div`
   text-align: left;
 
   h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
+    font-size: 28px;
+    font-weight: 550;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
   }
 
   p {
-    font-size: 14px;
+    font-size: 18px;
     color: #666;
   }
 `;
 
-const SeeRecipe = styled.button`
-  background-color: #ffaa7c;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 15px;
+const SeeRecipe = styled.span`
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #5f1f52;
   cursor: pointer;
-  font-size: 14px;
-
-  &:hover {
-    background-color: #ff884c;
-  }
 `;
 
 const Search = () => {
-  const [searchParams, setSearchParams] = useSearchParams(); // URL에서 검색 쿼리 추출
+  const [searchParams, setSearchParams] = useSearchParams();
   const [nameResults, setNameResults] = useState([]);
   const [ingredientResults, setIngredientResults] = useState([]);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState("name"); // 현재 선택된 탭 ("name" or "ingredient")
-  const [newQuery, setNewQuery] = useState(""); // 새로운 검색어
+  const [activeTab, setActiveTab] = useState("name");
+  const [newQuery, setNewQuery] = useState("");
   const navigate = useNavigate();
 
-  const query = searchParams.get("query"); // 검색어 가져오기
+  const query = searchParams.get("query");
 
   useEffect(() => {
     const fetchResults = async () => {
-      if (!query) return; // 검색어가 없으면 실행 안 함
+      if (!query) return;
       try {
-        // 이름 검색 결과
         const fetchedNameResults = await fetchByName(query);
         setNameResults(fetchedNameResults || []);
 
-        // 재료 검색 결과
         const fetchedIngredientResults = await fetchByIngredient(query);
         setIngredientResults(fetchedIngredientResults || []);
       } catch (err) {
@@ -166,18 +153,18 @@ const Search = () => {
     };
 
     fetchResults();
-  }, [query]); // query가 변경될 때마다 실행
+  }, [query]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (newQuery.trim()) {
-      navigate(`/search?query=${encodeURIComponent(newQuery)}`); // 새 검색어로 페이지 이동
-      setSearchParams({ query: newQuery }); // URL 업데이트
-      setNewQuery(""); // 입력 초기화
+      navigate(`/search?query=${encodeURIComponent(newQuery)}`);
+      setSearchParams({ query: newQuery });
+      setNewQuery("");
     }
   };
 
-  const renderResults = (results) => {
+  const renderNameResults = (results) => {
     if (!Array.isArray(results) || results.length === 0) {
       return <p>No results found.</p>;
     }
@@ -193,7 +180,33 @@ const Search = () => {
               <h3>{cocktail.strDrink}</h3>
               <p>Main Ingredient: {cocktail.strIngredient1 || "Unknown"}</p>
             </Info>
-            <SeeRecipe>See Recipe</SeeRecipe>
+            <SeeRecipe onClick={() => navigate(`/detail/${cocktail.idDrink}`)}>
+              See Recipe
+            </SeeRecipe>
+          </Card>
+        ))}
+      </ResultsList>
+    );
+  };
+
+  const renderIngredientResults = (results) => {
+    if (!Array.isArray(results) || results.length === 0) {
+      return <p>No results found.</p>;
+    }
+
+    return (
+      <ResultsList>
+        {results.map((cocktail) => (
+          <Card key={cocktail.idDrink}>
+            <Thumbnail>
+              <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
+            </Thumbnail>
+            <Info>
+              <h3>{cocktail.strDrink}</h3>
+            </Info>
+            <SeeRecipe onClick={() => navigate(`/detail/${cocktail.idDrink}`)}>
+              See Recipe
+            </SeeRecipe>
           </Card>
         ))}
       </ResultsList>
@@ -203,7 +216,9 @@ const Search = () => {
   return (
     <Container>
       <Header>
-        <img src={Logo} alt="Siply Logo" />
+        <Link to="/">
+          <img src={Logo} alt="Siply Logo" />
+        </Link>
       </Header>
       <SearchBar onSubmit={handleSearch}>
         <input
@@ -230,8 +245,8 @@ const Search = () => {
       </Tabs>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {activeTab === "name"
-        ? renderResults(nameResults)
-        : renderResults(ingredientResults)}
+        ? renderNameResults(nameResults)
+        : renderIngredientResults(ingredientResults)}
     </Container>
   );
 };

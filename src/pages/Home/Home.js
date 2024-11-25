@@ -5,6 +5,7 @@ import Logo from "../../imgs/Logo.png";
 import ColorThief from "colorthief";
 import { ReactComponent as SearchIcon } from "../../imgs/SearchIcon.svg";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const Container = styled.div`
   max-width: 400px;
@@ -78,14 +79,15 @@ const Form = styled.form`
   align-items: center;
   input {
     width: 100%;
-    font-size: 28px;
+    font-size: 24px;
     outline: none;
     border: none;
     background: none;
     font-family: "116angmuburi";
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: flex-start;
+    padding: 10px;
   }
 `;
 
@@ -93,6 +95,7 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [randomCocktail, setRandomCocktail] = useState(null);
   const [mainColor, setMainColor] = useState("#FFAA7C");
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -113,6 +116,8 @@ const Home = () => {
         };
       } catch (error) {
         console.error("Failed to fetch random cocktail:", error);
+      } finally {
+        setTimeout(() => setIsLoading(false), 2000);
       }
     };
 
@@ -122,9 +127,19 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/search?query=${encodeURIComponent(searchQuery)}`); // Search.js로 이동
+      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
     }
   };
+
+  const handleSeeRecipe = () => {
+    if (randomCocktail && randomCocktail.idDrink) {
+      navigate(`/detail/${randomCocktail.idDrink}`);
+    }
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Container>
@@ -140,7 +155,9 @@ const Home = () => {
               alt={randomCocktail.strDrink}
             />
           </CocktailImage>
-          <Button bgColor={mainColor}>See Recipe</Button>
+          <Button bgColor={mainColor} onClick={handleSeeRecipe}>
+            See Recipe
+          </Button>
         </>
       )}
       <SearchContainer>

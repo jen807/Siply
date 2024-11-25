@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { fetchRandom } from "../../api";
 import Logo from "../../imgs/Logo.png";
+import ColorThief from "colorthief";
+import { ReactComponent as SearchIcon } from "../../imgs/SearchIcon.svg";
 
 const Container = styled.div`
   max-width: 400px;
@@ -45,13 +47,14 @@ const CocktailImage = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: ${(props) => props.bgColor || "#f5a623"};
+  background-color: ${(props) => props.bgColor || "#FFAA7C"};
   border: none;
   color: white;
   padding: 10px 20px;
+  font-family: "Noto Sans";
   font-size: 16px;
   font-weight: 300;
-  border-radius: 20px;
+  border-radius: 50px;
   cursor: pointer;
   margin-bottom: 30px;
 `;
@@ -66,20 +69,22 @@ const SearchContainer = styled.div`
 const Form = styled.form`
   width: 100%;
   border-bottom: 1px solid black;
-  padding: 10px;
   font-size: 24px;
+  padding: 10px;
+  box-sizing: border-box;
   input {
-    width: 70%;
-    margin-right: 10px;
+    width: 100%;
     font-size: 22px;
     outline: none;
-    all: unset;
+    border: none;
+    background: none;
+    font-family: "116angmuburi";
   }
 `;
 
 const Home = () => {
   const [randomCocktail, setRandomCocktail] = useState(null);
-  const [mainColor, setMainColor] = useState("#f5a623");
+  const [mainColor, setMainColor] = useState("#FFAA7C");
 
   useEffect(() => {
     const loadRandomCocktail = async () => {
@@ -88,17 +93,14 @@ const Home = () => {
         setRandomCocktail(cocktail);
 
         const img = new Image();
-        img.src = cocktail.strDrinkThumb;
         img.crossOrigin = "Anonymous";
+        img.src = cocktail.strDrinkThumb;
+
         img.onload = () => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.drawImage(img, 0, 0, img.width, img.height);
-          const pixelData = ctx.getImageData(0, 0, 1, 1).data;
-          const extractedColor = `rgb(${pixelData[0]}, ${pixelData[1]}, ${pixelData[2]})`;
-          setMainColor(extractedColor);
+          const colorThief = new ColorThief();
+          const dominantColor = colorThief.getColor(img);
+          const rgbColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+          setMainColor(rgbColor);
         };
       } catch (error) {
         console.error("Failed to fetch random cocktail:", error);

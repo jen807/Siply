@@ -21,7 +21,7 @@ ${reset}
   }
 
   body {
-    font-family: '116angmuburi', Arial, sans-serif;
+    font-family: '116angmuburi','Noto Sans', 'Noto Sans KR', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #F3EEF2;

@@ -4,6 +4,7 @@ import { fetchRandom } from "../../api";
 import Logo from "../../imgs/Logo.png";
 import ColorThief from "colorthief";
 import { ReactComponent as SearchIcon } from "../../imgs/SearchIcon.svg";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 400px;
@@ -83,8 +84,10 @@ const Form = styled.form`
 `;
 
 const Home = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [randomCocktail, setRandomCocktail] = useState(null);
   const [mainColor, setMainColor] = useState("#FFAA7C");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadRandomCocktail = async () => {
@@ -110,6 +113,13 @@ const Home = () => {
     loadRandomCocktail();
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
   return (
     <Container>
       <Logos>
@@ -129,7 +139,12 @@ const Home = () => {
       )}
       <SearchContainer>
         <Form>
-          <input type="text" placeholder="Enter name or Ingredient" />
+          <input
+            type="text"
+            placeholder="Enter name or Ingredient"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <SearchIcon />
         </Form>
       </SearchContainer>
     </Container>

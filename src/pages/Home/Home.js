@@ -69,17 +69,23 @@ const SearchContainer = styled.div`
 
 const Form = styled.form`
   width: 100%;
+  height: 30px;
   border-bottom: 1px solid black;
   font-size: 24px;
   padding: 10px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
   input {
     width: 100%;
-    font-size: 22px;
+    font-size: 28px;
     outline: none;
     border: none;
     background: none;
     font-family: "116angmuburi";
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-start;
   }
 `;
 
@@ -116,7 +122,7 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+      navigate(`/search?query=${encodeURIComponent(searchQuery)}`); // Search.js로 이동
     }
   };
 
@@ -138,10 +144,11 @@ const Home = () => {
         </>
       )}
       <SearchContainer>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Enter name or Ingredient"
+            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <SearchIcon />

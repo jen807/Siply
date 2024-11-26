@@ -26,6 +26,7 @@ const ImageWrapper = styled.div`
 
 const LoadingText = styled.p`
   font-size: 40px;
+  font-weight: 500;
   color: #333;
 `;
 

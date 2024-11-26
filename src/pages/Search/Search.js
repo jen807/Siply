@@ -29,7 +29,7 @@ const SearchBar = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 10px 0 0;
   margin-bottom: 20px;
   border-bottom: 1px solid black;
 
@@ -41,6 +41,11 @@ const SearchBar = styled.form`
     background: none;
     outline: none;
     font-family: "116angmuburi";
+  }
+
+  &::placeholder {
+    padding: 10px;
+    font-size: 24px;
   }
 
   svg {
@@ -59,9 +64,10 @@ const Tabs = styled.div`
     padding: 10px 20px;
     border: none;
     background-color: #f3eef2;
+    font-family: "116angmuburi";
     color: #333;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     border-bottom: 2px solid transparent;
 
     &.active {
@@ -172,7 +178,10 @@ const Search = () => {
     return (
       <ResultsList>
         {results.map((cocktail) => (
-          <Card key={cocktail.idDrink}>
+          <Card
+            onClick={() => navigate(`/detail/${cocktail.idDrink}`)}
+            key={cocktail.idDrink}
+          >
             <Thumbnail>
               <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
             </Thumbnail>

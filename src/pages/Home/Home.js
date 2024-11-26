@@ -6,6 +6,7 @@ import ColorThief from "colorthief";
 import { ReactComponent as SearchIcon } from "../../imgs/SearchIcon.svg";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
+import Background from "../../components/Background";
 
 const Container = styled.div`
   max-width: 400px;
@@ -62,6 +63,8 @@ const Button = styled.button`
 `;
 
 const SearchContainer = styled.div`
+  width: 100%;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,24 +73,31 @@ const SearchContainer = styled.div`
 
 const Form = styled.form`
   width: 100%;
-  height: 30px;
   border-bottom: 1px solid black;
   font-size: 24px;
-  padding: 10px;
+  padding: 0 10px;
   box-sizing: border-box;
-  display: flex;
   align-items: center;
+  justify-content: space-between;
+  text-align: left;
   input {
-    width: 100%;
-    font-size: 24px;
+    all: unset;
     outline: none;
     border: none;
     background: none;
     font-family: "116angmuburi";
     margin-bottom: 10px;
-    display: flex;
-    justify-content: flex-start;
-    padding: 10px;
+
+    &::placeholder {
+      font-size: 24px;
+      padding: 10px 10px 10px 0;
+    }
+  }
+
+  svg {
+    position: absolute;
+    bottom: 12px;
+    right: 10px;
   }
 `;
 
@@ -142,36 +152,39 @@ const Home = () => {
   }
 
   return (
-    <Container>
-      <Logos>
-        <img src={Logo} alt="Siply Logo" />
-      </Logos>
-      {randomCocktail && (
-        <>
-          <h2>today's cocktail</h2>
-          <CocktailImage>
-            <img
-              src={randomCocktail.strDrinkThumb}
-              alt={randomCocktail.strDrink}
+    <>
+      <Background />
+      <Container>
+        <Logos>
+          <img src={Logo} alt="Siply Logo" />
+        </Logos>
+        {randomCocktail && (
+          <>
+            <h2>today's cocktail</h2>
+            <CocktailImage>
+              <img
+                src={randomCocktail.strDrinkThumb}
+                alt={randomCocktail.strDrink}
+              />
+            </CocktailImage>
+            <Button bgColor={mainColor} onClick={handleSeeRecipe}>
+              See Recipe
+            </Button>
+          </>
+        )}
+        <SearchContainer>
+          <Form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Enter name or Ingredient"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-          </CocktailImage>
-          <Button bgColor={mainColor} onClick={handleSeeRecipe}>
-            See Recipe
-          </Button>
-        </>
-      )}
-      <SearchContainer>
-        <Form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter name or Ingredient"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <SearchIcon />
-        </Form>
-      </SearchContainer>
-    </Container>
+            <SearchIcon />
+          </Form>
+        </SearchContainer>
+      </Container>
+    </>
   );
 };
 

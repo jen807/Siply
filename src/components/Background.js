@@ -59,7 +59,7 @@ const Background = () => {
       <div
         className="column"
         style={{
-          top: window.innerWidth <= 440 ? "180px" : "300px",
+          top: window.innerWidth <= 440 ? "180px" : "100px",
           left: window.innerWidth <= 440 ? "-10px" : "-30px",
           gap: window.innerWidth <= 440 ? "5px" : "20px",
         }}

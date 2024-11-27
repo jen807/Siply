@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchById } from "../../api";
 import Logo from "../../imgs/Logo.png";
 import Loading from "../../components/Loading";
+import BackArrow from "../../imgs/BackArrow.png";
 
 const Container = styled.div`
   max-width: 500px;
@@ -16,9 +17,19 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 65px;
+  position: relative;
 
   img {
     width: 100px;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 8px;
+    left: 50px;
+    img {
+      width: 10px;
+    }
   }
 `;
 
@@ -129,6 +140,9 @@ const Detail = () => {
   return (
     <Container>
       <Header>
+        <Link to="/" className="arrow">
+          <img src={BackArrow} alt="backarrow" />
+        </Link>
         <Link to="/">
           <img src={Logo} alt="Siply Logo" />
         </Link>

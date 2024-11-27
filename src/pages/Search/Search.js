@@ -4,6 +4,7 @@ import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { fetchByName, fetchByIngredient } from "../../api";
 import Logo from "../../imgs/Logo.png";
 import { ReactComponent as SearchIcon } from "../../imgs/SearchIcon.svg";
+import Background from "../../components/Background";
 
 const Container = styled.div`
   max-width: 500px;
@@ -223,41 +224,44 @@ const Search = () => {
   };
 
   return (
-    <Container>
-      <Header>
-        <Link to="/">
-          <img src={Logo} alt="Siply Logo" />
-        </Link>
-        <h3></h3>
-      </Header>
-      <SearchBar onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Enter name or Ingredient"
-          value={newQuery}
-          onChange={(e) => setNewQuery(e.target.value)}
-        />
-        <SearchIcon onClick={handleSearch} />
-      </SearchBar>
-      <Tabs>
-        <button
-          className={activeTab === "name" ? "active" : ""}
-          onClick={() => setActiveTab("name")}
-        >
-          By Name
-        </button>
-        <button
-          className={activeTab === "ingredient" ? "active" : ""}
-          onClick={() => setActiveTab("ingredient")}
-        >
-          By Ingredient
-        </button>
-      </Tabs>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {activeTab === "name"
-        ? renderNameResults(nameResults)
-        : renderIngredientResults(ingredientResults)}
-    </Container>
+    <>
+      <Background />
+      <Container>
+        <Header>
+          <Link to="/">
+            <img src={Logo} alt="Siply Logo" />
+          </Link>
+          <h3></h3>
+        </Header>
+        <SearchBar onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Enter name or Ingredient"
+            value={newQuery}
+            onChange={(e) => setNewQuery(e.target.value)}
+          />
+          <SearchIcon onClick={handleSearch} />
+        </SearchBar>
+        <Tabs>
+          <button
+            className={activeTab === "name" ? "active" : ""}
+            onClick={() => setActiveTab("name")}
+          >
+            By Name
+          </button>
+          <button
+            className={activeTab === "ingredient" ? "active" : ""}
+            onClick={() => setActiveTab("ingredient")}
+          >
+            By Ingredient
+          </button>
+        </Tabs>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {activeTab === "name"
+          ? renderNameResults(nameResults)
+          : renderIngredientResults(ingredientResults)}
+      </Container>
+    </>
   );
 };
 

@@ -36,7 +36,6 @@ const BackgroundContainer = styled.div`
     filter: blur(2px);
   }
 
-  /* 반응형 설정 */
   @media (max-width: 440px) {
     .circle {
       width: 62px;
@@ -57,7 +56,6 @@ const BackgroundContainer = styled.div`
 const Background = () => {
   return (
     <BackgroundContainer>
-      {/* 첫 번째 줄 */}
       <div
         className="column"
         style={{
@@ -76,7 +74,6 @@ const Background = () => {
         />
       </div>
 
-      {/* 두 번째 줄 */}
       <div
         className="column"
         style={{
@@ -89,7 +86,6 @@ const Background = () => {
         <div className="circle" />
       </div>
 
-      {/* 세 번째 줄 */}
       <div
         className="column"
         style={{
@@ -107,7 +103,6 @@ const Background = () => {
         />
       </div>
 
-      {/* 네 번째 줄 */}
       <div
         className="column"
         style={{

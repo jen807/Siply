@@ -228,6 +228,7 @@ const Search = () => {
         <Link to="/">
           <img src={Logo} alt="Siply Logo" />
         </Link>
+        <h3></h3>
       </Header>
       <SearchBar onSubmit={handleSearch}>
         <input

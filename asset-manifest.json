@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/Siply/static/js/main.31cec1ac.js",
+    "main.js": "/Siply/static/js/main.e67a4c23.js",
     "index.html": "/Siply/index.html",
     "static/media/Group 12.svg": "/Siply/static/media/Group 12.e9bab95235b2607fe7e9b45c7af52cf1.svg",
     "static/media/Group 13.svg": "/Siply/static/media/Group 13.156398566b5fc235aa89e267fa2f1a04.svg",
     "static/media/Line 5.svg": "/Siply/static/media/Line 5.2528e30e024f89629413441c3ce51bc5.svg",
     "static/media/SearchIcon.svg": "/Siply/static/media/SearchIcon.c41e322209731f264480b58f197b298c.svg",
-    "main.31cec1ac.js.map": "/Siply/static/js/main.31cec1ac.js.map"
+    "main.e67a4c23.js.map": "/Siply/static/js/main.e67a4c23.js.map"
   },
   "entrypoints": [
-    "static/js/main.31cec1ac.js"
+    "static/js/main.e67a4c23.js"
   ]
 }

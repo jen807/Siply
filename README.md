@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Siply
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project URL
 
-## Available Scripts
+[https://jen807.github.io/Siply/#/](https://jen807.github.io/Siply/#/)
 
-In the project directory, you can run:
+## Purpose
 
-### `npm start`
+The purpose of this app is to help users easily (simply) discover cocktail recipes and enjoy a sip of their favorite drink.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- JavaScript
+- React
+- Node.js
+- Git
+- GitHub
+- CSS
+- HTML
 
-### `npm test`
+## Development Period
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+November 25th - November 28th (4 days)
 
-### `npm run build`
+## Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Recommends a "Cocktail of the Day" and allows users to search for cocktail recipes.
+- Categorizes search results into cocktails matching the search term in their **names** or **ingredients**.
+- Displays the list of ingredients and their measurements.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Supported Devices
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- PC
+- Mobile
 
-### `npm run eject`
+## Font
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Heading/Body: "116angmuburi", sans-serif
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Key Learnings During Development
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### colorThief.getColor()
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `colorThief.getColor()` is a method from the Color Thief library that extracts the dominant color from a given image.
+- This was used to dynamically style the main button with the background color of the recommended cocktail's image.
+- This feature added a dynamic and visually appealing touch, enhancing the user experience and making the site feel more interactive.
 
-## Learn More
+### Paying Attention to Fonts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- While testing on mobile, I noticed that the fonts displayed as intended on PC but defaulted to Noto Sans on mobile devices.
+- I resolved this by:
+  1. Removing Noto Sans from the `body` font-family.
+  2. Applying Noto Sans only to specific elements where necessary.
+- This ensured font consistency across different devices.

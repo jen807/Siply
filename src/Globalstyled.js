@@ -21,7 +21,7 @@ ${reset}
   }
 
   body {
-    font-family: '116angmuburi', sans-serif;
+    font-family: '116angmuburi';
     margin: 0;
     padding: 0;
     background-color: #F3EEF2;

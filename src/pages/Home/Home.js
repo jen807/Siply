@@ -21,6 +21,7 @@ const Container = styled.div`
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
+  font-family: "116angmuburi";
 
   h2 {
     font-size: 40px;

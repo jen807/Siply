@@ -11,6 +11,7 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 40px 20px;
   text-align: center;
+  font-family: "116angmuburi";
 `;
 
 const Header = styled.div`

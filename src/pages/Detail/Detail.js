@@ -5,6 +5,7 @@ import { fetchById } from "../../api";
 import Logo from "../../imgs/Logo.png";
 import Loading from "../../components/Loading";
 import BackArrow from "../../imgs/BackArrow.png";
+import Background from "../../components/Background";
 
 const Container = styled.div`
   max-width: 500px;

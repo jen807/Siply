@@ -53,74 +53,65 @@ const BackgroundContainer = styled.div`
   }
 `;
 
+const circleDelays = [
+  "0s",
+  "0.5s",
+  "1s",
+  "1.5s",
+  "2s",
+  "2.5s",
+  "3s",
+  "3.5s",
+  "4s",
+];
+
 const Background = () => {
   return (
     <BackgroundContainer>
-      <div
-        className="column"
-        style={{
+      {[
+        {
           top: window.innerWidth <= 440 ? "180px" : "100px",
           left: window.innerWidth <= 440 ? "-10px" : "-30px",
           gap: window.innerWidth <= 440 ? "5px" : "20px",
-        }}
-      >
-        <div className="circle" />
-        <div className="circle" />
-        <div
-          className="circle"
-          style={{
-            opacity: window.innerWidth <= 440 ? "0.3" : "0.3",
-          }}
-        />
-      </div>
-
-      <div
-        className="column"
-        style={{
+          count: 3,
+        },
+        {
           bottom: window.innerWidth <= 440 ? "-25px" : "-100px",
           left: window.innerWidth <= 440 ? "90px" : "360px",
           gap: window.innerWidth <= 440 ? "5px" : "250px",
-        }}
-      >
-        <div className="circle" />
-        <div className="circle" />
-      </div>
-
-      <div
-        className="column"
-        style={{
+          count: 2,
+        },
+        {
           bottom: window.innerWidth <= 440 ? "280px" : "65%",
           right: window.innerWidth <= 440 ? "55px" : "400px",
           gap: window.innerWidth <= 440 ? "5px" : "20px",
-        }}
-      >
-        <div className="circle" />
-        <div
-          className="circle"
-          style={{
-            opacity: window.innerWidth <= 440 ? "0.3" : "0.3",
-          }}
-        />
-      </div>
-
-      <div
-        className="column"
-        style={{
+          count: 2,
+        },
+        {
           top: window.innerWidth <= 440 ? "-9px" : "120px",
           right: window.innerWidth <= 440 ? "-15px" : "23px",
           gap: window.innerWidth <= 440 ? "5px" : "50px",
-        }}
-      >
-        <div className="circle" />
+          count: 3,
+        },
+      ].map((column, columnIndex) => (
         <div
-          className="circle"
+          className="column"
+          key={columnIndex}
           style={{
-            opacity: window.innerWidth <= 440 ? "0.3" : "0.3",
-            marginBottom: window.innerWidth <= 440 ? "0" : "100px",
+            ...column,
           }}
-        />
-        <div className="circle" />
-      </div>
+        >
+          {Array.from({ length: column.count }).map((_, circleIndex) => (
+            <div
+              className="circle"
+              key={circleIndex}
+              style={{
+                animationDelay: circleDelays[columnIndex * 3 + circleIndex] || "0s",
+              }}
+            />
+          ))}
+        </div>
+      ))}
     </BackgroundContainer>
   );
 };

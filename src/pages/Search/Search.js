@@ -92,6 +92,7 @@ const Card = styled.div`
   padding: 15px;
   background-color: #f9f6f8;
   border-radius: 60px 0px 60px 60px;
+  cursor: pointer;
 `;
 
 const Thumbnail = styled.div`
@@ -208,7 +209,8 @@ const Search = () => {
     return (
       <ResultsList>
         {results.map((cocktail) => (
-          <Card key={cocktail.idDrink}>
+          <Card key={cocktail.idDrink}
+          onClick={() => navigate(`/detail/${cocktail.idDrink}`)}>
             <Thumbnail>
               <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
             </Thumbnail>

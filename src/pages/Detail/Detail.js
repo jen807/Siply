@@ -139,6 +139,8 @@ const Detail = () => {
   }
 
   return (
+   <>
+    <Background />
     <Container>
       <Header>
         <Link to="/" className="arrow">
@@ -167,6 +169,7 @@ const Detail = () => {
         ))}
       </IngredientsList>
     </Container>
+   </>
   );
 };
 

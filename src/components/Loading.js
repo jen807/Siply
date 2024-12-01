@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Line1 from "../imgs/Line 5.svg";
 import Line2 from "../imgs/Group 12.svg";
 import Line3 from "../imgs/Group 13.svg";
+import Background from "./Background";
 
 const Container = styled.div`
   display: flex;
@@ -43,12 +44,15 @@ const Loading = () => {
   }, [images.length]);
 
   return (
+    <>
+    <Background />
     <Container>
       <ImageWrapper>
         <img src={images[currentImage]} alt="Loading animation" />
       </ImageWrapper>
       <LoadingText>LOADING...</LoadingText>
     </Container>
+    </>
   );
 };
 
